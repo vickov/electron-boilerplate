@@ -1,4 +1,8 @@
+//TODO: Implement React Async
+//TODO: Move Fetching to Requests.js
+
 import React from 'react'
+import axios from 'axios'
 import styled from 'styled-components'
 import {
   useTable,
@@ -11,7 +15,20 @@ import {
 } from 'react-table'
 import matchSorter from 'match-sorter'
 
-import makeData from './makeData'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import MaUTable from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+
+import { useAsync } from 'react-async';
+
+//import makeData from './makeData'
+import loadUsers from './requests'
+
+
+
 
 const Styles = styled.div`
   padding: 1rem;
@@ -303,10 +320,10 @@ function Table({ columns, data, updateMyData, disablePageResetOnDataChange }) {
       // automatically be available on the instance.
       // That way we can call this function from our
       // cell renderer!
-      updateMyData,
+      //updateMyData,
       // We also need to pass this so the page doesn't change
       // when we edit the data
-      disablePageResetOnDataChange,
+      disablePageResetOnDataChange
     },
     useFilters,
     useGroupBy,
@@ -319,12 +336,12 @@ function Table({ columns, data, updateMyData, disablePageResetOnDataChange }) {
   // Render the UI for your table
   return (
     <>
-      <table {...getTableProps()}>
-        <thead>
+       <MaUTable {...getTableProps()}>
+        <TableHead>
           {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <TableRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>
+                <TableCell {...column.getHeaderProps()}>
                   <div>
                     {column.canGroupBy ? (
                       // If the column can be grouped, let's add a toggle
@@ -344,19 +361,19 @@ function Table({ columns, data, updateMyData, disablePageResetOnDataChange }) {
                   </div>
                   {/* Render the columns filter UI */}
                   <div>{column.canFilter ? column.render('Filter') : null}</div>
-                </th>
+                </TableCell>
               ))}
-            </tr>
+            </TableRow>
           ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
+        </TableHead>
+        <TableBody {...getTableBodyProps()}>
           {page.map(
             row =>
               prepareRow(row) || (
-                <tr {...row.getRowProps()}>
+                <TableRow {...row.getRowProps()}>
                   {row.cells.map(cell => {
                     return (
-                      <td {...cell.getCellProps()}>
+                      <TableCell {...cell.getCellProps()}>
                         {cell.isGrouped ? (
                           // If it's a grouped cell, add an expander and row count
                           <>
@@ -374,14 +391,14 @@ function Table({ columns, data, updateMyData, disablePageResetOnDataChange }) {
                           // Otherwise, just render the regular cell
                           cell.render('Cell', { editable: true })
                         )}
-                      </td>
+                      </TableCell>
                     )
                   })}
-                </tr>
+                </TableRow>
               )
           )}
-        </tbody>
-      </table>
+        </TableBody>
+      </MaUTable>
       {/* 
         Pagination can be built however you'd like. 
         This is just a very basic UI implementation:
@@ -510,7 +527,7 @@ function App() {
         columns: [
           {
             Header: 'First Name',
-            accessor: 'firstName',
+            accessor: 'userId',
             // Use a two-stage aggregator here to first
             // count the total rows being aggregated,
             // then sum any of those counts if they are
@@ -520,7 +537,7 @@ function App() {
           },
           {
             Header: 'Last Name',
-            accessor: 'lastName',
+            accessor: 'title',
             // Use our custom `fuzzyText` filter on this column
             filter: 'fuzzyText',
             // Use another two-stage aggregator here to
@@ -537,7 +554,7 @@ function App() {
         columns: [
           {
             Header: 'Age',
-            accessor: 'age',
+            accessor: 'body',
             Filter: SliderColumnFilter,
             filter: 'equals',
             // Aggregate the average age of visitors
@@ -574,7 +591,10 @@ function App() {
     []
   )
 
-  const [data, setData] = React.useState(() => makeData(10000))
+  
+  const { data, error, isLoading } = useAsync({ promiseFn: loadUsers })
+
+  
   const [originalData] = React.useState(data)
 
   // We need to keep the table from resetting the pageIndex when we
@@ -584,7 +604,7 @@ function App() {
   // When our cell renderer calls updateMyData, we'll use
   // the rowIndex, columnID and new value to update the
   // original data
-  const updateMyData = (rowIndex, columnID, value) => {
+  /* const updateMyData = (rowIndex, columnID, value) => {
     // We also turn on the flag to not reset the page
     skipPageResetRef.current = true
     setData(old =>
@@ -599,29 +619,52 @@ function App() {
       })
     )
   }
+ */
+  
+ // React.useEffect(() => setData(loadUsers()), []);
 
+
+ /*  React.useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(
+        `https://jsonplaceholder.typicode.com/posts`,
+      );
+      //let res = JSON.parse(result.data);
+      setData(result.data);
+    };
+    fetchData();
+  }, []); */
+ 
+ /* const onFetchData = () => {}
+
+  */
   // After data chagnes, we turn the flag back off
   // so that if data actually changes when we're not
   // editing it, the page is reset
-  React.useEffect(() => {
+  /* React.useEffect(() => {
     skipPageResetRef.current = false
   }, [data])
-
+ */
   // Let's add a data resetter/randomizer to help
   // illustrate that flow...
   const resetData = () => {
     // Don't reset the page when we do this
     skipPageResetRef.current = true
-    setData(originalData)
+    //setData(originalData)
   }
 
+  if (isLoading) return "Loading..."
+  if (error) return `Something went wrong: ${error.message}`
+  if (data)
+
   return (
+    
     <Styles>
       <button onClick={resetData}>Reset Data</button>
+      <CssBaseline />
       <Table
         columns={columns}
         data={data}
-        updateMyData={updateMyData}
         disablePageResetOnDataChange={skipPageResetRef.current}
       />
     </Styles>
