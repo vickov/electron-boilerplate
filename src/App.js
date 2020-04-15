@@ -1,5 +1,9 @@
-//TODO: Implement React Async
-//TODO: Move Fetching to Requests.js
+//DONE: Implement React Async
+//DONE: Move Fetching to Requests.js
+//TODO: Move React-table componenet to another file
+//TODO: Integrate React-Router (possibly ortogonally) - inpect React Asnyc lazy loading - possible to construct app with configuration
+//TODO: Integrate Navbar or Sidebar
+//TODO: Test react-big-scheduler
 
 import React from 'react'
 import axios from 'axios'
