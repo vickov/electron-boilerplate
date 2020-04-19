@@ -6,15 +6,17 @@
 //TODO: Create new Table component from the render part
 
 import React from 'react'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import TableTest from './TableTest'
+import TableUsers from './TableUsers'
+import Users from './Users'
 
 function App() {
   return (
    <BrowserRouter>
     <Routes>
       <Route path="/" element={<TableTest />} />
-      <Route path="users/*" element={<TableTest />} />
+      <Route path="/users/" element={<TableUsers />} />
     </Routes>
   </BrowserRouter>
   )

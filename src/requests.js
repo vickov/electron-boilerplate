@@ -16,9 +16,14 @@ export const addContact = (data) => axios.post(`${APIURL}/contacts`, data);
 export const editContact = (data) => axios.put(`${APIURL}/contacts/${data.id}`, data);
 export const deleteContact = (id) => axios.delete(`${APIURL}/contacts/${id}`);
 
-export const loadUsers = async () =>
+export const loadPosts = async () =>
   await fetch("https://jsonplaceholder.typicode.com/posts")
     .then(res => (res.ok ? res : Promise.reject(res)))
     .then(res => res.json())
 
+export const loadUsers = async () =>
+    await fetch("https://jsonplaceholder.typicode.com/users")
+      .then(res => (res.ok ? res : Promise.reject(res)))
+      .then(res => res.json())
+  
 export default getToDos;
