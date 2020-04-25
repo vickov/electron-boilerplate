@@ -16,7 +16,7 @@ import MaUTable from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
+//import TableRow '@material-ui/core/TableRow'
 
 
 export function tablecolumns(){
@@ -79,31 +79,7 @@ export function tablecolumns(){
             // Aggregate the average age of visitors
             aggregate: 'average',
             Aggregated: ({ cell: { value } }) => `${value} (avg)`,
-          },
-          {
-            Header: 'Visits',
-            accessor: 'visits',
-            Filter: NumberRangeColumnFilter,
-            filter: 'between',
-            // Aggregate the sum of all visits
-            aggregate: 'sum',
-            Aggregated: ({ cell: { value } }) => `${value} (total)`,
-          },
-          {
-            Header: 'Status',
-            accessor: 'status',
-            Filter: SelectColumnFilter,
-            filter: 'includes',
-          },
-          {
-            Header: 'Profile Progress',
-            accessor: 'progress',
-            Filter: SliderColumnFilter,
-            filter: filterGreaterThan,
-            // Use our custom roundedMedian aggregator
-            aggregate: roundedMedian,
-            Aggregated: ({ cell: { value } }) => `${value} (med)`,
-          },
+          }
         ],
       },
     ]
@@ -375,12 +351,12 @@ export function Table({ columns, data, updateMyData, disablePageResetOnDataChang
   // Render the UI for your table
   return (
     <>
-       <MaUTable {...getTableProps()}>
-        <TableHead>
+       <table {...getTableProps()}>
+        <thead>
           {headerGroups.map(headerGroup => (
-            <TableRow {...headerGroup.getHeaderGroupProps()}>
+            <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <TableCell {...column.getHeaderProps()}>
+                <td{...column.getHeaderProps()}>
                   <div>
                     {column.canGroupBy ? (
                       // If the column can be grouped, let's add a toggle
@@ -400,19 +376,19 @@ export function Table({ columns, data, updateMyData, disablePageResetOnDataChang
                   </div>
                   {/* Render the columns filter UI */}
                   <div>{column.canFilter ? column.render('Filter') : null}</div>
-                </TableCell>
+                </td>
               ))}
-            </TableRow>
+            </tr>
           ))}
-        </TableHead>
-        <TableBody {...getTableBodyProps()}>
+        </thead>
+        <tbody {...getTableBodyProps()}>
           {page.map(
             row =>
               prepareRow(row) || (
-                <TableRow {...row.getRowProps()}>
+                <tr{...row.getRowProps()}>
                   {row.cells.map(cell => {
                     return (
-                      <TableCell {...cell.getCellProps()}>
+                      <td {...cell.getCellProps()}>
                         {cell.isGrouped ? (
                           // If it's a grouped cell, add an expander and row count
                           <>
@@ -430,14 +406,14 @@ export function Table({ columns, data, updateMyData, disablePageResetOnDataChang
                           // Otherwise, just render the regular cell
                           cell.render('Cell', { editable: true })
                         )}
-                      </TableCell>
+                      </td>
                     )
                   })}
-                </TableRow>
+                </tr>
               )
           )}
-        </TableBody>
-      </MaUTable>
+        </tbody>
+      </table>
       {/* 
         Pagination can be built however you'd like. 
         This is just a very basic UI implementation:

@@ -3,9 +3,9 @@ import React from 'react'
 import { useAsync } from 'react-async';
 import CssBaseline from '@material-ui/core/CssBaseline'
 
-import {loadUsers, loadPosts}  from './requests'
+import {loadUsers}  from './requests'
 import Styles from './Styles'
-import {Table, SliderColumnFilter, NumberRangeColumnFilter, SelectColumnFilter, filterGreaterThan, roundedMedian} from './ReactTable'
+import {Table, SliderColumnFilter} from './ReactTable'
 
 
 function tablecolumnsUsers(){

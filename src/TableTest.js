@@ -19,7 +19,7 @@ function TableTest() {
 
   return (
  
- <Styles>
+    <Styles>
       <CssBaseline />
       <Table
         columns={columns}
