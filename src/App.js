@@ -1,12 +1,15 @@
 //DONE: Implement React Async
 //DONE: Move Fetching to Requests.js
-//TODO: Integrate React-Router (possibly ortogonally) - inpect React Asnyc lazy loading - possible to construct app with configuration
-//TODO: Integrate Navbar or Sidebar
+//DONE: Integrate React-Router (possibly ortogonally) - inpect React Asnyc lazy loading - possible to construct app with configuration
+//DONE: Integrate Navbar or Sidebar
+//DONE: Create new Table component (Users) from the render part - Done?
+//TODO: Interactive search integration
+//TODO: Integrate tabs
 //TODO: Test react-big-scheduler
-//TODO: Create new Table component from the render part - Done?
+//TODO: Separarte app into folder and concerns
 
 import React from 'react'
-import { BrowserRouter, Routes, Route, Switch} from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import TableTest from './TableTest'
 //import TableUsers from './TableUsers'
 import Users from './TableUsers'
