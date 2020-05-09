@@ -7,23 +7,24 @@
 //TODO: Integrate tabs
 //TODO: Test react-big-scheduler
 //TODO: Separarte app into folder and concerns
+//TODO: Integrate fiscalization
 
 import React from 'react'
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import TableTest from './TableTest'
 //import TableUsers from './TableUsers'
 import Users from './TableUsers'
-import PermanentDrawerLeft from './Navbar'
+import Navbar from './Navbar'
 
 function App() {
   return (
    <BrowserRouter>
-    <PermanentDrawerLeft>
+    <Navbar>
     <Routes>
       <Route path="/" element={<TableTest />} />
       <Route path="/users/" element={<Users />} />
     </Routes>
-    </PermanentDrawerLeft>
+    </Navbar>
   </BrowserRouter>
   )
 }

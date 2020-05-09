@@ -12,10 +12,11 @@ import {
 import matchSorter from 'match-sorter'
 
 
-import MaUTable from '@material-ui/core/Table'
+/*import MaUTable from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
+*/
 //import TableRow '@material-ui/core/TableRow'
 
 
