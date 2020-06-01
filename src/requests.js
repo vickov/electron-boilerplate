@@ -1,8 +1,9 @@
-const APIURL = 'https://jsonplaceholder.typicode.com/posts';
+//const APIURL = 'https://jsonplaceholder.typicode.com/';
+const APIURL = 'http://localhost:5000/';
 const axios = require('axios');
  export const fetchData = async () => {
     return async () => axios(
-      `https://jsonplaceholder.typicode.com/posts`,
+      APIURL + `posts`,
     );
     //let res = JSON.parse(result.data);
   }; 
@@ -11,18 +12,18 @@ const getToDos = async () => {
     let data = res.data;
     return data;
 }
-//export const fetchData = () => axios(`https://jsonplaceholder.typicode.com/posts`);
+//export const fetchData = () => axios(`APIURLposts`);
 export const addContact = (data) => axios.post(`${APIURL}/contacts`, data);
 export const editContact = (data) => axios.put(`${APIURL}/contacts/${data.id}`, data);
 export const deleteContact = (id) => axios.delete(`${APIURL}/contacts/${id}`);
 
 export const loadPosts = async () =>
-  await fetch("https://jsonplaceholder.typicode.com/posts")
+  await fetch(APIURL+ "posts")
     .then(res => (res.ok ? res : Promise.reject(res)))
     .then(res => res.json())
 
 export const loadUsers = async () =>
-    await fetch("https://jsonplaceholder.typicode.com/users")
+    await fetch(APIURL + "users")
       .then(res => (res.ok ? res : Promise.reject(res)))
       .then(res => res.json())
   

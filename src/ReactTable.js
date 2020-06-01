@@ -8,6 +8,8 @@ import {
   useGroupBy,
   useExpanded,
   useRowSelect,
+  useGlobalFilter, 
+  useAsyncDebounce 
 } from 'react-table'
 import matchSorter from 'match-sorter'
 
@@ -47,25 +49,12 @@ export function tablecolumns(){
         columns: [
           {
             Header: 'First Name',
-            accessor: 'userId',
-            // Use a two-stage aggregator here to first
-            // count the total rows being aggregated,
-            // then sum any of those counts if they are
-            // aggregated further
-            aggregate: ['sum', 'count'],
-            Aggregated: ({ cell: { value } }) => `${value} Names`,
+            accessor: 'firstname'
           },
           {
             Header: 'Last Name',
-            accessor: 'title',
-            // Use our custom `fuzzyText` filter on this column
-            filter: 'fuzzyText',
-            // Use another two-stage aggregator here to
-            // first count the UNIQUE values from the rows
-            // being aggregated, then sum those counts if
-            // they are aggregated further
-            aggregate: ['sum', 'uniqueCount'],
-            Aggregated: ({ cell: { value } }) => `${value} Unique Names`,
+            accessor: 'lastname',
+            defaultCanFilter: false
           },
         ],
       },
@@ -73,20 +62,55 @@ export function tablecolumns(){
         Header: 'Info',
         columns: [
           {
-            Header: 'Age',
-            accessor: 'body',
-            Filter: SliderColumnFilter,
-            filter: 'equals',
-            // Aggregate the average age of visitors
-            aggregate: 'average',
-            Aggregated: ({ cell: { value } }) => `${value} (avg)`,
+            Header: 'Email',
+            accessor: 'email'
           }
         ],
       },
     ]
 
   };
-  
+
+/*
+export  const handleOnChange = event => {
+    setData(originalData.filter(row => {
+      return row.firstName.includes(event.target.value) || row.lastName.includes(event.target.value) || String(row.age).includes(event.target.value)
+    }))
+    setSearch(event.target.value)
+  }
+*/
+
+// Define a default UI for filtering
+function GlobalFilter({
+  preGlobalFilteredRows,
+  globalFilter,
+  setGlobalFilter,
+}) {
+  const count = preGlobalFilteredRows.length
+  const [value, setValue] = React.useState(globalFilter)
+  const onChange = useAsyncDebounce(value => {
+    setGlobalFilter(value || undefined)
+  }, 200)
+
+  return (
+    <span>
+      Search:{' '}
+      <input
+        value={value || ""}
+        onChange={e => {
+          setValue(e.target.value);
+          onChange(e.target.value);
+        }}
+        placeholder={`${count} records...`}
+        style={{
+          fontSize: '1.1rem',
+          border: '0',
+        }}
+      />
+    </span>
+  )
+}
+
 
 // Create an editable cell renderer
 export const EditableCell = ({
@@ -323,14 +347,19 @@ export function Table({ columns, data, updateMyData, disablePageResetOnDataChang
       filters,
       selectedRowPaths,
     },
+    state,
+    visibleColumns,
+    preGlobalFilteredRows,
+    setGlobalFilter
   } = useTable(
     {
       columns,
       data,
       defaultColumn,
       filterTypes,
+      disableFilters:true,
       // nestExpandedRows: true,
-      initialState: { pageIndex: 2 },
+      initialState: { pageIndex: 0 },
       // updateMyData isn't part of the API, but
       // anything we put into these options will
       // automatically be available on the instance.
@@ -342,11 +371,12 @@ export function Table({ columns, data, updateMyData, disablePageResetOnDataChang
       disablePageResetOnDataChange
     },
     useFilters,
+    useGlobalFilter,
     useGroupBy,
     useSortBy,
     useExpanded,
     usePagination,
-    useRowSelect
+    useRowSelect  
   )
 
   // Render the UI for your table
@@ -381,6 +411,20 @@ export function Table({ columns, data, updateMyData, disablePageResetOnDataChang
               ))}
             </tr>
           ))}
+          <tr>
+            <th
+              colSpan={visibleColumns.length}
+              style={{
+                textAlign: "left"
+              }}
+            >
+              <GlobalFilter
+                preGlobalFilteredRows={preGlobalFilteredRows}
+                globalFilter={state.globalFilter}
+                setGlobalFilter={setGlobalFilter}
+              />
+            </th>
+          </tr>
         </thead>
         <tbody {...getTableBodyProps()}>
           {page.map(

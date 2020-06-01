@@ -3,7 +3,8 @@
 //DONE: Integrate React-Router (possibly ortogonally) - inpect React Asnyc lazy loading - possible to construct app with configuration
 //DONE: Integrate Navbar or Sidebar
 //DONE: Create new Table component (Users) from the render part - Done?
-//TODO: Interactive search integration
+//TODO: Interactive search integration - React table global filter
+//TODO: Insert, Update, Delete
 //TODO: Integrate tabs
 //TODO: Test react-big-scheduler
 //TODO: Separarte app into folder and concerns

@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { useAsync } from 'react-async';
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -35,7 +34,7 @@ function tablecolumnsUsers(){
         columns: [
           {
             Header: 'First Name',
-            accessor: 'name',
+            accessor: 'firstname',
             // Use a two-stage aggregator here to first
             // count the total rows being aggregated,
             // then sum any of those counts if they are
@@ -45,7 +44,7 @@ function tablecolumnsUsers(){
           },
           {
             Header: 'Last Name',
-            accessor: 'username',
+            accessor: 'lastname',
             // Use our custom `fuzzyText` filter on this column
             filter: 'fuzzyText',
             // Use another two-stage aggregator here to
