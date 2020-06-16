@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 
 import {loadUsers}  from './requests'
 import Styles from './Styles'
-import {Table, SliderColumnFilter} from './ReactTable'
+import {Table} from './ReactTable'
 
 
 function tablecolumnsUsers(){
@@ -62,8 +62,6 @@ function tablecolumnsUsers(){
           {
             Header: 'Age',
             accessor: 'email',
-            Filter: SliderColumnFilter,
-            filter: 'equals',
             // Aggregate the average age of visitors
             aggregate: 'average',
             Aggregated: ({ cell: { value } }) => `${value} (avg)`,

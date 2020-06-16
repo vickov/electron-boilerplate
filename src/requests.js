@@ -27,4 +27,22 @@ export const loadUsers = async () =>
       .then(res => (res.ok ? res : Promise.reject(res)))
       .then(res => res.json())
   
+
+export const updateUsers  = async()  =>
+      await fetch(APIURL + "users", settings)
+        .then(res => (res.ok ? res : Promise.reject(res)))
+        .then(res => res.json())
+  
+
+const settings = {
+   method: 'POST',
+   headers: {
+       Accept: 'application/json',
+       'Content-Type': 'application/json',
+    },
+    body: JSON.stringify("")
+ };
+
+     
+
 export default getToDos;
