@@ -29,13 +29,13 @@ export const loadUsers = async () =>
   
 
 export const updateUsers  = async()  =>
-      await fetch(APIURL + "users", settings)
+      await fetch(APIURL + "users/28", settings)
         .then(res => (res.ok ? res : Promise.reject(res)))
         .then(res => res.json())
   
 
 const settings = {
-   method: 'POST',
+   method: 'PATCH',
    headers: {
        Accept: 'application/json',
        'Content-Type': 'application/json',
