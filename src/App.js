@@ -5,10 +5,11 @@
 //DONE: Create new Table component (Users) from the render part - Done?
 //DONe: Interactive search integration - React table global filter
 //TODO: Insert, Update, Delete
-//TODO: Integrate tabs
-//TODO: Test react-big-scheduler
-//TODO: Separindrte app into folder and concerns
 //TODO: Integrate fiscalization
+//TODO: Integrate tabs
+//TODO: Test react-big-scheduler (or simplier alternative with list)
+//TODO: Separindrte app into folder and concerns
+
 
 import React from 'react'
 import { BrowserRouter, Routes, Route} from 'react-router-dom';

@@ -28,20 +28,28 @@ export const loadUsers = async () =>
       .then(res => res.json())
   
 
-export const updateUsers  = async()  =>
-      await fetch(APIURL + "users/28", settings)
-        .then(res => (res.ok ? res : Promise.reject(res)))
-        .then(res => res.json())
-  
+export const updateUsers  = async(id, column, value)  =>
+    { 
 
-const settings = {
-   method: 'PATCH',
-   headers: {
-       Accept: 'application/json',
-       'Content-Type': 'application/json',
-    },
-    body: JSON.stringify("")
- };
+     var obj = {};
+     obj[column] = value;
+
+     const settings = {
+      method: 'PATCH',
+      headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+       },
+       body: JSON.stringify(obj)
+    };
+   
+    
+      await fetch(APIURL + "users/" + id , settings)
+        .then(res => (res.ok ? res : Promise.reject(res)))
+        .then(res => res.body)
+
+        }
+
 
      
 

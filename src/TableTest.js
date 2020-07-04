@@ -47,7 +47,7 @@ function TableTest() {
     //     return row
     //   })
     // )
-    updateUsers(value);
+    updateUsers(rowIndex, columnId, value);
     console.log(rowIndex, columnId, value )
     return rowIndex
   }
