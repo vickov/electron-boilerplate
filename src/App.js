@@ -4,11 +4,12 @@
 //DONE: Integrate Navbar or Sidebar
 //DONE: Create new Table component (Users) from the render part - Done?
 //DONe: Interactive search integration - React table global filter
-//TODO: Insert, Update, Delete
+//Done: Update (not Delete)
+//TODO: Insert
 //TODO: Integrate fiscalization
 //TODO: Integrate tabs
 //TODO: Test react-big-scheduler (or simplier alternative with list)
-//TODO: Separindrte app into folder and concerns
+//TODO: Separate app into folder and concerns
 
 
 import React from 'react'
