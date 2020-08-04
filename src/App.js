@@ -18,6 +18,7 @@ import TableTest from './TableTest'
 //import TableUsers from './TableUsers'
 import Users from './TableUsers'
 import Navbar from './Navbar'
+import Form from './form'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
     <Routes>
       <Route path="/" element={<TableTest />} />
       <Route path="/users/" element={<Users />} />
+      <Route path="/form" element={<Form />} />
     </Routes>
     </Navbar>
   </BrowserRouter>

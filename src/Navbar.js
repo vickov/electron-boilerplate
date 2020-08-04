@@ -78,6 +78,10 @@ export const Navbar =  (props) => {
               <ListItemIcon><InboxIcon /></ListItemIcon>
               <ListItemText primary='Users' />
             </ListItem>
+            <ListItem button  component={Link} to="/form">
+              <ListItemIcon><InboxIcon /></ListItemIcon>
+              <ListItemText primary='Form' />
+            </ListItem>
           {['Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
@@ -96,6 +100,7 @@ export const Navbar =  (props) => {
         </List>
       </Drawer>
       <main className={classes.content}>
+      <div className={classes.toolbar} />
       {props.children}
       </main>
     </div>

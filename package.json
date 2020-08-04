@@ -34,6 +34,7 @@
     "react-app-polyfill": "^1.0.6",
     "react-async": "^10.0.1",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^6.0.8",
     "react-router": "^6.0.0-alpha.3",
     "react-router-dom": "^6.0.0-alpha.3",
     "react-scripts": "3.4.1",
@@ -66,7 +67,7 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version",
-      "last 1 Explorer version" 
+      "last 1 Explorer version"
     ]
   },
   "devDependencies": {

@@ -50,6 +50,40 @@ export const updateUsers  = async(id, column, value)  =>
 
         }
 
+export const insertUser  = async(data)  =>
+    { 
+
+     var obj = {
+      "firstname": "Mirko",
+      "lastname": "Vitasovic",
+      "picture": "http://placehold.it/32x32",
+      "eyeColor": "brown",
+      "age": 29,
+      "company": "CRUSTATIA",
+      "email": "leona.fowler@crustatia.io",
+      "phone": "+1 (935) 574-2524",
+      "address": "996 Berry Street, Soham, Tennessee, 2244",
+      "about": "About",
+      "registered": "2014-06-17T09:29:51.887Z",
+      "additionalProp1": "{}"
+  }
+
+
+     const settings = {
+      method: 'POST',
+      headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+       },
+       body: JSON.stringify(obj)
+    };
+   
+    
+      await fetch(APIURL + "users/" , settings)
+        .then(res => (res.ok ? res : Promise.reject(res)))
+        .then(res => res.body)
+
+        }
 
      
 
