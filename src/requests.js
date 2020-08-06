@@ -52,10 +52,9 @@ export const updateUsers  = async(id, column, value)  =>
 
 export const insertUser  = async(data)  =>
     { 
-
      var obj = {
-      "firstname": "Mirko",
-      "lastname": "Vitasovic",
+      "firstname": data.firstName,
+      "lastname": data.lastName,
       "picture": "http://placehold.it/32x32",
       "eyeColor": "brown",
       "age": 29,

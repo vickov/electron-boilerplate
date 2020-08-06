@@ -2,6 +2,9 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import {insertUser}  from './requests'
 
+import "./formstyle.css";
+
+
 function Form() {
   const { register, handleSubmit, errors } = useForm();
   //const onSubmit = data => console.log(data);
@@ -10,10 +13,11 @@ function Form() {
 
   return (
 <>
-    
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input name="example" defaultValue="test" ref={register} />
-      <input name="exampleRequired" ref={register({ required: true })} />
+      <label>First Name</label>
+      <input placeholder="First name" name="firstName" ref={register({ required: true })}/>
+      <label>Last Name</label>
+      <input name="lastName" ref={register({ required: true })} />
       {errors.exampleRequired && <span>This field is required</span>}
       <input type="submit" />
     </form>
