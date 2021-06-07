@@ -5,7 +5,7 @@ import Styles from './Styles'
 import "./formstyle.css";
 
 
-function Form() {
+function Invoice() {
   const { register, handleSubmit, errors } = useForm();
   //const onSubmit = data => console.log(data);
   const onSubmit = data => insertUser(data);
@@ -15,8 +15,8 @@ function Form() {
     <Styles>
 <>
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label>First Name</label>
-      <input placeholder="First name" name="firstName" ref={register({ required: true })}/>
+      <label>Amount</label>
+      <input placeholder="0" name="amount" ref={register({ required: true })}/>
       <label>Last Name</label>
       <input name="lastName" ref={register({ required: true })} />
       {errors.exampleRequired && <span>This field is required</span>}
@@ -27,4 +27,4 @@ function Form() {
   );
 }
 
-export default Form;
+export default Invoice;

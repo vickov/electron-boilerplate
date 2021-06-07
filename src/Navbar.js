@@ -82,6 +82,10 @@ export const Navbar =  (props) => {
               <ListItemIcon><InboxIcon /></ListItemIcon>
               <ListItemText primary='Form' />
             </ListItem>
+            <ListItem button  component={Link} to="/invoice">
+              <ListItemIcon><InboxIcon /></ListItemIcon>
+              <ListItemText primary='Invoice' />
+            </ListItem>
           {['Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>

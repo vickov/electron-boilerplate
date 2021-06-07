@@ -19,6 +19,7 @@ import TableTest from './TableTest'
 import Users from './TableUsers'
 import Navbar from './Navbar'
 import Form from './form'
+import Invoice from './invoice'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <Route path="/" element={<TableTest />} />
       <Route path="/users/" element={<Users />} />
       <Route path="/form" element={<Form />} />
+      <Route path="/invoice" element={<Invoice />} />
     </Routes>
     </Navbar>
   </BrowserRouter>
